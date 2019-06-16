@@ -1,0 +1,7 @@
+version: "Apple Swift version 4.2.1 (swiftlang-1000.11.42 clang-1000.11.45.1)"
+options: "8cc80343e375b9a90f260985759c0ebc"
+build_time: [1551508913, 114294000]
+inputs:
+  "/Users/tangxi/Downloads/personal/ios-develop/BullsEye/BullsEye/AboutViewControlViewController.swift": [9223372036, 854775807]
+  "/Users/tangxi/Downloads/personal/ios-develop/BullsEye/BullsEye/ViewController.swift": [1551507269, 0]
+  "/Users/tangxi/Downloads/personal/ios-develop/BullsEye/BullsEye/AppDelegate.swift": [1551356627, 0]
