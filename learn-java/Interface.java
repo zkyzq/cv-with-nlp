@@ -1,6 +1,6 @@
 /**
  * @author               :tangxi.zq
- * @Description          :用接口实现的不同收入计税。
+ * @Description          :用接口实现的不同收入计税,和抽象类不同。
  */
 
 class Interface
