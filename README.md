@@ -12,3 +12,8 @@ java包结构。用了这么久的java，才终于知道包结构的作用，就
 java作用域。java的成员变量叫feild，成员函数叫method。作用域的说明见oopScope.java注释。by zhangqi
 low到爆的shell基础知识及FM(因子分解机)预测部分python实现,顺带回忆下python. by zhikangyi
 
+### 2019-06-23
+python 飞机大战，很经典，不得不说同一个功能，python实现起来简单太多了。by zhangqi.
+
+### 2019-06-24
+java classpath的设置(最好就是默认当前路径)和jar包的理解(其实就是压缩文件,但压缩前里面目录一定要注意) by zhangqi.
