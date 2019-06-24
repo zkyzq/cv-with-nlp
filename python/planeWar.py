@@ -29,6 +29,7 @@ plane_img = pygame.image.load('resources/image/shoot.png')
 shootMusic = pygame.mixer.Sound('resources/sound/bullet.wav')
 level_up_music = pygame.mixer.Sound('resources/sound/game_over.wav')
 
+
 class Bullet(pygame.sprite.Sprite):
     def __init__(self,bullet_image, bullet_position):
         pygame.sprite.Sprite.__init__(self)
@@ -36,7 +37,7 @@ class Bullet(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.midbottom = bullet_position
         self.move = 1.1
-    def bullet_move():
+    def bulletMove(self):
         self.rect.top -= self.move
 
 class Player(pygame.sprite.Sprite):
@@ -95,6 +96,17 @@ class Enemy(pygame.sprite.Sprite):
         self.rect.top += self.move
 
 def main():
+    WIDTH = 480
+    HEIGHT = 800
+
+    SHOOT_PC = 0
+    ENEMY_PC = 0
+
+    enemy_add  =300
+    player_shoot = 0
+
+    score = 0
+    level = 1
     # 加载player 飞机图片
 
     player_rect = [pygame.Rect(0, 99, 102, 126),
@@ -138,9 +150,9 @@ def main():
 
         if not player.is_hit:
             screen.blit(player.image[player.img_index], player.rect)
-            player.img_index = SHOOT_PC / 247
+            player.img_index = SHOOT_PC // 247
         else:
-            player.img_index = player_shoot / 247
+            player.img_index = player_shoot // 247
             screen.blit(player.image[player.img_index], player.rect)
             player_shoot += 31
             if player_shoot > 495:
@@ -180,7 +192,7 @@ def main():
                 enemies_shoot.remove(enemy_shoots)
                 score += 100
                 continue
-            screen.blit(enemy_shoots.shoot_imgs[enemy_shoots.shoot_index / 20], enemy_shoots.rect)
+            screen.blit(enemy_shoots.shoot_imgs[enemy_shoots.shoot_index // 20], enemy_shoots.rect)   #此处python3和python2不一样，python2中整数相除是整数
             enemy_shoots.shoot_index += 1
 
         enemies.draw(screen)
