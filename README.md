@@ -19,3 +19,15 @@ python 飞机大战，很经典，不得不说同一个功能，python实现起�
 ### 2019-06-24
 java classpath的设置(最好就是默认当前路径)和jar包的理解(其实就是压缩文件,但压缩前里面目录一定要注意) .  
 写了几个二维数组(图像数据)处理的函数，转置，中值滤波，阈值处理。by zhangqi.
+### 2019-06-25
+java 模块。IDE-free是一种境界，不是说不用ide，而是知道如何用普通的文本编辑器写代码，并且知道如何用系统自带的工具去运行，只是为了工作效率去用ide而已。java代码的编译，执行过程常用指令为：
+
+
+  javac -d bin src/module-info.java src/com/alibaba/sample/*.java     //编译src目录下所有源码文件，生成的class文件在bin中
+  java -cp app.jar:a.jar:b.jar:c.jar com.alibaba.sample.Main  //运行一个java程序
+  jar --create --file hello.jar --main-class com.alibaba.sample.Main -C bin .   //打包成jar  
+  java -jar hello.jar  //运行jar  
+  jmod create --class-path hello.jar hello.jmod  //创建模块文件  
+  jlink --module-path hello.jmod --add-modules java.base,java.xml,hello.world --output jre/  //用jlink将模块文件以及用到的其他模块裁    减成最小的jre执行单元      
+  jre/bin/java  --module hello.world     //执行jre 
+
