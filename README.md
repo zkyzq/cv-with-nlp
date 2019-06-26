@@ -31,3 +31,5 @@ java 模块。IDE-free是一种境界，不是说不用ide，而是知道如何�
   jlink --module-path hello.jmod --add-modules java.base,java.xml,hello.world --output jre/  //用jlink将模块文件以及用到的其他模块裁    减成最小的jre执行单元      
   jre/bin/java  --module hello.world     //执行jre 
 
+### 2019-06-26
+java字符串，java引用类型一定要深入理解。字符串不可变，对字符串进行的操作实际上是返回了一个新的字符串，原字符串是不可变的。注意引用类型的深拷贝和浅拷贝。
