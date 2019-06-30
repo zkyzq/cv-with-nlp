@@ -39,3 +39,5 @@ java特有的stringbuilder类，可以提高java中string运算的速度。另�
 java stringjoiner类。
 ### 2019-06-29  
 今日code：下载图像！！PS：我发现我还可以直接在网页上编辑文件，并不会从电脑传到github哈哈哈哈哈，又可以愉快的push了
+### 2019-06-30
+python人脸检测dlib库，学习资料链接：https://face-recognition.readthedocs.io/en/latest/readme.html
