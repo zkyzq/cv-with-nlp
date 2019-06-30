@@ -37,3 +37,5 @@ java字符串，java引用类型一定要深入理解。字符串不可变，对
 java特有的stringbuilder类，可以提高java中string运算的速度。另外，今天开始学习SQL！今天的成果：安装MySQL。计划一周入门。
 ### 2019-06-28
 java stringjoiner类。
+### 2019-06-30
+git、vim常用基本操作总结，FM反向传播代码完善。by zhikangyi  
