@@ -15,7 +15,7 @@ for it in range(self.iter): # 迭代次数
         # 计算预测
         pred = w_0 + mat(x) * w + interaction
         print("预测的输出pred:", pred)
-        # 计算sigmoid(y*pred_y)-1准确的说不是loss，原作者这边理解的有问题，只是作为更新w的中间参数，这边算出来的是越大越好，而下面却用了梯度下降而不是梯度上升的算法在
+        # 计算sigmoid(y*pred_y)-1准确的说不是loss，只是作为更新w的中间参数，二分类的损失loss的梯度可以表示为：gradient = (self.sigmoid(classLabels[x] * p[0, 0]) -1)*classLabels[x]*p_derivative，其中 p_derivative 代表常数项、一次项、交叉项的导数
         loss = self.sigmoid(classLabels[x] * p[0, 0]) - 1
         if loss >= -1: # 暂时不明白这段作用 
             loss_res = '正方向 '
