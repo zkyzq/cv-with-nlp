@@ -129,11 +129,11 @@ git fetch origin master:master1
 # 这个命令会访问远程仓库，从中拉取所有你还没有的数据。 执行完成后，你将会拥有那个远程仓库中所有分支的引用，可以随时合并或查看
 ```
 
-## 5. 补充：git clone / git pull / git fetch作用与区别
+## 5. git clone / git pull / git fetch作用与区别
 ```
 git clone:克隆，本地没有repository，从远程仓库复制下载  
 git pull: 拉，本地有repository，从远程仓库将commit数据下载，并与本地代码进行merge  
-git fetch:取，本地有repository，从远程仓库将数据拉到本地，但不进行merge，git pull = git fetch + git merge  
+git fetch:取，本地有repository，从远程仓库将数据拉到本地，但不进行merge，git pull = git fetch + git merge
 ```
 
 ## 6. 合并
