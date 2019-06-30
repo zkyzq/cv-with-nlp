@@ -1,4 +1,3 @@
-[toc]
 
 # [git doc](https://git-scm.com/book/zh/v2)
 # [github帮助文档ch](https://github.com/waylau/github-help)
