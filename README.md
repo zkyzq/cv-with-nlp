@@ -42,3 +42,6 @@ java stringjoiner类。
 ### 2019-06-30
 python人脸检测dlib库，学习资料链接：https://face-recognition.readthedocs.io/en/latest/readme.html    
 git、vim常用基本操作总结，FM反向传播代码完善。by zhikangyi  
+
+### 2019-07-01
+java包装类型
