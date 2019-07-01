@@ -40,4 +40,5 @@ java stringjoiner类。
 ### 2019-06-29  
 今日code：下载图像！！PS：我发现我还可以直接在网页上编辑文件，并不会从电脑传到github哈哈哈哈哈，又可以愉快的push了
 ### 2019-06-30
-python人脸检测dlib库，学习资料链接：https://face-recognition.readthedocs.io/en/latest/readme.html
+python人脸检测dlib库，学习资料链接：https://face-recognition.readthedocs.io/en/latest/readme.html    
+git、vim常用基本操作总结，FM反向传播代码完善。by zhikangyi  
