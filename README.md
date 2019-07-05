@@ -52,3 +52,5 @@ JavaBean，private属性+public读写方法
 java 枚举类，枚举类也是类，只是将其能定义的实例数目固定了，实例还是可以定义很多字段
 ### 2019-07-04
 Java BigInteger，和Integer等一样都是继承自Number类，所以有很多共同的实例方法
+### 2019-07-05
+Java BigDecimal 浮点数的精确表示
