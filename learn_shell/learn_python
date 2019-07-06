@@ -1,0 +1,126 @@
+# python知识点
+**---------------2019.07.04--------------**
+## 路径拼接函数os.path.join()
+- 功能：
+1、链接两个或多个路径名组件，中间会自动加上'\' 
+2、如果有一个组件是一个绝对路径（即前边有'/'），则在它之前的所有组件均会被舍弃  
+3、如果最后一个组件为空，则生成的路径以一个’/’分隔符结尾  
+-示例：
+```
+>>> import os
+>>> path1 = 'home'
+>>> path2 = 'work'
+>>> path3 = 'test'
+>>> print(os.path.join(path1,path2,path3))
+home\work\test
+
+>>> path1 = 'home'
+>>> path2 = '/work'
+>>> path3 = 'test'
+>>> print(os.path.join(path1,path2,path3))
+/work\test # 因为work是绝对路径，所以home被忽略
+
+>>> path1 = '/home'
+>>> path2 = 'work'
+>>> path3 = ''
+>>> print(os.path.join(path1,path2,path3))
+/home\work\
+```
+## os.listdir() 
+- 功能：用于返回指定的文件夹包含的文件或文件夹的名字的列表。这个列表以字母顺序。 它不包括 '.' 和'..' 即使它在文件夹中。
+- 示例：
+```
+>>> import os
+>>> import sys
+>>> dirs = os.listdir("/home/zhikangyi001/My_stock_kg/")
+>>> print(dirs)
+['.git', 'LICENSE', 'README.md', 'build_csv.py', 'data', 'design.png', 'extract.py', 'img', 'import.report', 'import.sh', 'requirements.txt', 'result.txt', 'stock.py']
+```
+
+**---------------2019.07.05--------------**
+## map()
+- 功能：将一个序列的元素依次输入作为参数的某个函数，得到一个列表或迭代器  
+***注：python2.x返回列表，python3.x返回迭代器***
+- 格式：map(function, iterable)  
+- 示例：
+```
+# python2.7
+>>> def square(x):
+...     return x ** 2
+... 
+>>> map(square, [1,2,3,4,5])
+[1, 4, 9, 16, 25]
+# 使用lambda函数
+>>> map(lambda x, y : x + y, [1,2,3,4], [1,2,3,4])
+[2, 4, 6, 8]
+```
+- ***踩坑：！！！原因并未搞清楚！！！***
+```
+for k,v in zip(List, map(function, List)):
+    del(List[0])
+# 后果：假设List长度为10，最后进循环5次就结束了
+```
+自己测试的case：
+```
+>>> List = [1,2,3,4,5,6]
+>>> resList = zip(List,map(square, List))
+>>> print(resList)
+[(1, 1), (2, 4), (3, 9), (4, 16), (5, 25), (6, 36)]
+>>> for k,v in resList:
+...     del(resList[0])
+...     print(resList, len(resList))
+... 
+([(2, 4), (3, 9), (4, 16), (5, 25), (6, 36)], 5)
+([(3, 9), (4, 16), (5, 25), (6, 36)], 4)
+([(4, 16), (5, 25), (6, 36)], 3)
+```
+# filter()
+- 功能：过滤掉不符合条件的元素，返回由符合条件元素组成的新列表  
+***注：python2.x返回列表，python3.x返回迭代器***
+- 格式：filter(function, iterable)
+- 示例：
+```
+>>> def isodd(x):
+...     return x % 2 == 1
+... 
+>>> def isodd(x):
+...     return x % 2 == 1
+... 
+>>> filter(isodd, [1,2,3,4,5,6])
+[1, 3, 5]
+```
+## 字典的深复制和浅复制
+```
+>>> import copy
+>>> dict1 = {'user':'test', 'num':[1,2,3]}
+>>> dict2 = dict1 # 直接复制，相当于引用
+>>> dict3 = dict1.copy() # 
+>>> dict4 = copy.deepcopy(dict1) # 深复制
+
+# 查看内存地址异同
+>>> id(dict1)
+139960238410280
+>>> id(dict2)
+139960238410280 # 内存地址相同
+>>> id(dict3) 
+139960238412136 # 内存地址不同
+>>> id(dict4)
+139960238414376 # 内存地址不同
+
+# 修改原字典查看相应改变情况
+>>> dict1['user'] = 'change'
+>>> dict1['num'].remove(1)
+>>> print(dict1)
+{'num': [2, 3], 'user': 'change'}
+
+>>> print(dict2) # 相同改变
+{'num': [2, 3], 'user': 'change'}
+
+>>> print(dict3) # ？？？？暂时没搞懂
+{'num': [2, 3], 'user': 'test'}
+
+>>> print(dict4) # 毫无改变
+{'num': [1, 2, 3], 'user': 'test'}
+>>> 
+```
+.....未完待续
