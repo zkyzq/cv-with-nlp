@@ -6,7 +6,6 @@
 //  Copyright © 2019年 tangxi. All rights reserved.
 //
 
-#include "colorizeImage.hpp"
 #include <opencv2/dnn/dnn.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
