@@ -54,3 +54,5 @@ java 枚举类，枚举类也是类，只是将其能定义的实例数目固定
 Java BigInteger，和Integer等一样都是继承自Number类，所以有很多共同的实例方法
 ### 2019-07-05
 Java BigDecimal 浮点数的精确表示
+### 2019-07-06
+OpenCV自动给图片上色算法
