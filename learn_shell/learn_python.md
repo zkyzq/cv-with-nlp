@@ -238,3 +238,74 @@ copy.deepcopy(),除了的最底层，其他的都会指向新的内存，最底�
 {'num': [1, 2, 3], 'user': 'test'}
 >>> 
 ```
+## csv库
+（https://www.jianshu.com/p/51211fcdf4b8）  
+CSV (Comma Separated Values)，即逗号分隔值，是一种常用的文本格式，用来存储表格数据，包括数字或者字符。  
+- 四个主要类：reader、writer、DictReader和DictWriter
+- 写数据示例：
+```
+#-*- coding: utf-8 -*
+import csv
+
+# 通过 writer类写入数据
+# 待写入的数据 注意到两个列表的元素个数不一样
+test_writer_data_1 = ['Tom', 'Cody', 'Zack']
+test_writer_data_2 = ['Mike', 'Bill']
+
+# 创建并打开文件
+with open('test_writer.csv', 'w', newline='', encoding='utf-8') as csvfile:
+    # 获得 writer对象 delimiter是分隔符 默认为 ","
+    writer = csv.writer(csvfile, delimiter=' ')
+    # 调用 writer的 writerow方法将 test_writer_data写入 test_writer.csv文件
+    writer.writerow(test_writer_data_1)
+    writer.writerow(test_writer_data_2)
+    # 也可以换成列表形式：writer.writerows([test_writer_data_1, test_writer_data_2])，注意这里是writerows，比之前多一个“s”
+
+
+# 通过 DictWriter类写入数据
+# 待写入的数据 注意到待写入的数据类型为 dict 且第二个字典没有 lastname
+test_dict_writer_data_1 = {'firstname': 'Tom', 'lastname': 'Loya'}
+test_dict_writer_data_2 = {'firstname': 'Tom', 'lastname': 'Loya'}
+
+# 创建并打开文件
+with open('test_dict_writer.csv', 'w', newline='', encoding='utf-8') as csvfile:
+    # 设置表头
+    fieldnames=['firstname','lastname', 'thirdname'] 
+    # 获得 DictWriter对象 delimiter是分隔符 默认为 "," 表头为 'firstname' 'lastname'
+    # 字典中的key一定要都被包含在fieldnames中，即fieldnames >= keys
+    dict_writer = csv.DictWriter(csvfile, delimiter=' ', fieldnames=fieldnames)
+    # 第一次写入数据先写入表头
+    dict_writer.writeheader()
+    # 调用 DictWriter的 writerow方法将 test_dict_writer_data写入 test_dict_writer.csv文件
+    dict_writer.writerow(test_dict_writer_data_1)
+    dict_writer.writerow(test_dict_writer_data_2)
+    # 也可以换成列表形式：writer.writerows([test_dict_writer_data_1, test_dict_writer_data_2])
+```
+
+- 读数据示例：
+```
+# reader读文件示例
+with open('test_writer.csv', 'r', encoding='utf-8') as csvfile:
+    # 获得 reader对象 delimiter是分隔符 默认为 ","
+    reader = csv.reader(csvfile, delimiter=' ')
+    for row in reader:
+        print(row)
+
+# DictReader读文件示例
+with open('test_dict_writer.csv', 'r', encoding='utf-8') as csvfile:
+    # 获得 DictReaderer对象 delimiter是分隔符 默认为 ","
+    dict_reader = csv.DictReader(csvfile, delimiter=' ')
+    for row in dict_reader:
+        print(row)
+```
+- 结果：
+```
+PS E:\Python_learning> python .\csv_lib_test.py
+['Tom', 'Cody', 'Zack']
+['Mike', 'Bill']
+{'lastname': 'Loya', 'thirdname': '', 'firstname': 'Tom'}
+{'lastname': 'Loya', 'thirdname': '', 'firstname': 'Tom'}
+```
+***注意：***  
+***（1）writer的文件要用reader，DictWriter写入的文件要用DictReader***  
+***（2）读文件的时候记得要设置对分隔符delimiter***
