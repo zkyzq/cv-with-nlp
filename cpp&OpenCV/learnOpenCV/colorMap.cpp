@@ -56,9 +56,68 @@ void colorMap(string img_name)
     imshow("Presucolor",img_out);
     waitKey(0);
 }
-int main()
-{
-    string img_filename = "test.jpg";
-    colorMap(img_filename);
-    return 0;
+#include "opencv2/highgui/highgui.hpp"
+#include "opencv2/imgproc/imgproc.hpp"
+#include <iostream>
+#include <cstdlib>
+
+using namespace cv;
+using namespace std;
+
+int main() {
+  string image_path = "test.jpg"; // 输入图像路径
+
+  // 定义变量
+  Mat src, gray, blur_image, threshold_output;
+
+  // 读取输入图像
+  src = imread(image_path, 1);
+  
+ // 转为灰度空间
+  cvtColor(src, gray, COLOR_BGR2GRAY);
+  
+  // 模糊操作
+  blur(gray, blur_image, Size(3, 3));
+  
+  // 阈值
+  threshold(gray, threshold_output, 200, 255, THRESH_BINARY);
+  
+  // 显示
+  namedWindow("Source", WINDOW_AUTOSIZE);
+  imshow("Source", src);
+
+  //凸包计算
+  Mat src_copy = src.clone();
+  
+  // 找轮廓，每个轮廓是一系列的点，有很多轮廓
+  vector< vector<Point> > contours;
+  vector<Vec4i> hierarchy;
+  
+  // 找轮廓
+  findContours(threshold_output, contours, hierarchy, RETR_TREE, 
+      CHAIN_APPROX_SIMPLE, Point(0, 0));
+  
+  // 定义凸包向量
+  vector< vector<Point> > hull(contours.size());
+
+  // 对每个轮廓判断其是否为凸包
+  for(int i = 0; i < contours.size(); i++)
+    convexHull(Mat(contours[i]), hull[i], false);
+  
+  // 定义一个全黑的图像
+  Mat drawing = Mat::zeros(threshold_output.size(), CV_8UC3);
+  
+  //画轮廓和凸包
+  for(int i = 0; i < contours.size(); i++) {
+    Scalar color_contours = Scalar(0, 255, 0); // color for contours : blue
+    Scalar color = Scalar(255, 255, 255); // color for convex hull : white
+    drawContours(drawing, contours, i, color_contours, 2, 8, vector<Vec4i>(), 0, Point());
+    drawContours(drawing, hull, i, color, 2, 8, vector<Vec4i>(), 0, Point());
+  }
+
+  namedWindow("Output", WINDOW_AUTOSIZE);
+  imshow("Output", drawing);
+
+  waitKey(0);
+  return 0;
 }
