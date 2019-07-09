@@ -1,5 +1,4 @@
 # python知识点
-**---------------2019.07.04--------------**
 ## 路径拼接函数os.path.join()
 - 功能：
 1、链接两个或多个路径名组件，中间会自动加上'\' 
@@ -37,7 +36,6 @@ home\work\test
 ['.git', 'LICENSE', 'README.md', 'build_csv.py', 'data', 'design.png', 'extract.py', 'img', 'import.report', 'import.sh', 'requirements.txt', 'result.txt', 'stock.py']
 ```
 
-**---------------2019.07.05--------------**
 ## map()
 - 功能：将一个序列的元素依次输入作为参数的某个函数，得到一个列表或迭代器  
 ***注：python2.x返回列表，python3.x返回迭代器***
@@ -309,3 +307,50 @@ PS E:\Python_learning> python .\csv_lib_test.py
 ***注意：***  
 ***（1）writer的文件要用reader，DictWriter写入的文件要用DictReader***  
 ***（2）读文件的时候记得要设置对分隔符delimiter***
+## operator.itermgetter
+- 功能：取项，获取某对象中的指定项，参数为索引或字典中的key
+- 示例：
+```
+# 列表
+>>> b = operator.itemgetter(2,5)
+>>> a = ['a','b','c','d','e','f']
+>>> b(a)
+('c', 'f')
+>>> b = operator.itemgetter(5,3)
+>>> b(a)
+('f', 'd')
+
+# 字典
+>>> b = operator.itemgetter('qw')
+>>> a = {'as':1, 'er':2, 'qw':89}
+>>> b(a)
+89
+```
+## 字典dict的values()和itervalues()
+- 功能：都是返回字典中的值
+- 区别：  
+dict.values()返回一个字典值values组成的list  
+dict.itervalues()返回一个可迭代对象，在迭代过程中依次取出value，节省了生成list所需的空间
+- 示例：
+```
+# dict.values()
+d = { 'Adam': 95, 'Lisa': 85, 'Bart': 59 }
+print d.values()
+# [85, 95, 59]
+for v in d.values():
+    print v
+# 85
+# 95
+# 59
+
+# dict.itervalues()
+d = { 'Adam': 95, 'Lisa': 85, 'Bart': 59 }
+print d.itervalues()
+# <dictionary-valueiterator object at 0x106adbb50>
+for v in d.itervalues():
+    print v
+# 85
+# 95
+# 59
+#参考：https://blog.csdn.net/u011944141/article/details/80799109
+```
