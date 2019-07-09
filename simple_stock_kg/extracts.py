@@ -23,6 +23,18 @@ def extract(stockpage_dir, executive_csv):
     # 读取html中的信息并写入executive_csv中
     with io.open(executive_csv, 'wb+') as infile:
         infile_dictWriter = csv.DictWriter(infile, headers)
+        infile_dictWriter.writeheader()
         
+        for page in pages:
+            file_name = page.split(r'/')[-1]
+            code = file_name.split(r'.')[0]
+            executives = []
+            with io.open(page, 'rb') as file_page:
+                content = file_page.read()
+                html = etree.HTML(content)
+                divs = html.xpath('//div[@id="ml_001"]//div[contains(@class, "person_table")]')
+                
+                for div in divs:
+                    item = {}
+                    item['name'] = div.xpath('.//thead/tr/td/h3/a/text()')[0].replace(',', '-')
         
-    
