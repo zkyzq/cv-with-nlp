@@ -354,3 +354,49 @@ for v in d.itervalues():
 # 59
 #参考：https://blog.csdn.net/u011944141/article/details/80799109
 ```
+## 文件配置类ConfigParser
+- 功能：读取配置文件
+- 使用方法：
+  - 初始化：
+  ```
+   import ConfigParser
+   # 生成ConfigParser对象
+   config = ConfigParser.ConfigParser()
+   # 读取配置文件
+   filename = 'config.ini'
+   config.read(filename, encoding='utf-8')
+  ```
+  - 配置文件config.ini格式： 
+  ```
+  [user] # 这个叫节点section
+  user_name = ABC
+  password = 222
+  
+  [ip_config]
+  ip = XXX.XX.XXX
+  port = xxx
+  # 有点像字典，读取方式也有点像...
+  ```
+  - ConfigParserObj.sections()  
+  获取节点名称函数，返回一个节点名组成的列表
+  ```
+  all_sections = config.sections()
+  print all_sections
+  # 结果： ['user', 'ip_config']
+  ```
+  - ConfigParserObj.items(section_name)    
+  以列表形式返回某个节点下所有的配置信息，每个信息是元组形式
+  ```
+  allinfo = config.items('user')
+  print allinfo
+  # 输出：[('user_name', 'ABC'), ('password', '222')]
+  ```
+  - ConfigParser.get(section_name, option)  
+  返回字符串形式的结果
+  ```
+  name = config.get(user, user_name)
+  print name
+  # 输出：'ABC'
+  ```
+  - ConfigParser.getint(section_name, option)  
+  返回int形式的结果
