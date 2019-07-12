@@ -70,3 +70,5 @@ java异常抛出：
 - 调用printStackTrace()可以打印异常的传播栈，对于调试非常有用  
 - 捕获异常并再次抛出新的异常时，应该持有原始异常信息；  
 - 通常不要在finally中抛出异常。如果在finally中抛出异常，应该原始异常加入到原有异常中。调用方可通过Throwable.getSuppressed()获取所有添加的Suppressed Exception
+### 2019-07-12
+java自定义异常，一定先从RuntimeException派生出BaseException，再从BaseException派生出各种其他异常
