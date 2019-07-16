@@ -9,6 +9,8 @@
   - 1、多进程模式：多个进程，诶个进程一个线程
   - 2、多线程模式：单个进程中多个线程
   - 3、多线程多进程模式：多个进程，每个进程多个线程（极少采用，太过复杂）
+- **多线程和多进程的最大区别**：  
+多进程中每个进程均有一份变量的拷贝，进程间互不影响；二多线程共享同样的变量，共享数据，可能存在多个线程同时修改某一个变量的情况。
  ## 多进程multiprocessing
 - **os.fork()**  
 此函数仅适用于linux/unix系统！普通的函数调用，调用一次，返回一次，但是fork()调用一次，返回两次，因为操作系统自动把当前进程（称为父进程）复制了一份（称为子进程），然后，分别在父进程和子进程内返回。  
@@ -54,3 +56,42 @@
   # Run child process test (14904)...
   # Child process end.
   ```
+## 多线程Threading
+启动一个线程就是把要执行的函数传入一个Thread实例中，然后调用start()开始。默认的线程为主线程，名称为MainThread;自己启动的线程为子线程，需要指定名称，Python‘自动名称为Thread-1...
+- **threading**
+  - **常用函数**：
+  获取当前线程实例：threading.current_thread()  
+  获取实例名称：threading.current_thread().name  
+  创建线程：threading.Thread(target=func, name='str')  
+  - **示例**：
+  ```
+  import time, threading
+
+  # 新线程执行的代码:
+  def loop():
+      print('thread %s is running...' % threading.current_thread().name)
+      n = 0
+      while n < 5:
+          n = n + 1
+          print('thread %s >>> %s' % (threading.current_thread().name, n))
+          time.sleep(1)
+  print('thread %s ended.' % threading.current_thread().name)
+
+  print('thread %s is running...' % threading.current_thread().name)
+  t = threading.Thread(target=loop, name='LoopThread')
+  t.start() # 和进程类似
+  t.join()
+  print('thread %s ended.' % threading.current_thread().name)
+  # 输出
+  '''
+  thread MainThread is running...
+  thread LoopThread is running...
+  thread LoopThread >>> 1
+  thread LoopThread >>> 2
+  thread LoopThread >>> 3
+  thread LoopThread >>> 4
+  thread LoopThread >>> 5
+  thread LoopThread ended.
+  thread MainThread ended.
+  '''
+```
