@@ -72,3 +72,7 @@ java异常抛出：
 - 通常不要在finally中抛出异常。如果在finally中抛出异常，应该原始异常加入到原有异常中。调用方可通过Throwable.getSuppressed()获取所有添加的Suppressed Exception
 ### 2019-07-12
 java自定义异常，一定先从RuntimeException派生出BaseException，再从BaseException派生出各种其他异常
+### 2019-07-17
+Commons Logging是使用最广泛的日志模块；
+Commons Logging的API非常简单；
+Commons Logging可以自动检测并使用其他日志模块。
