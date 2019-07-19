@@ -114,3 +114,33 @@ NF：字段数量变量
 awk -F '\t' -v OFS='\t' '{if(NF="'$col_num'")print $0}' $1_backup > $1
 # 这句话的作用是判断当前行的字段数和$col_num变量的值是否相等，其中OFS作用是指定输出时的分隔符时'\t'，-v感觉并不需要....
 ```
+## shell调用python函数
+- 方法一：直接调用python文件，但要在py文件中导入sys，使用sys.argv传参  
+ ***注：sys.argv[1]表示第一个参数，也就是说索引是从1开始的，sys.argv[0]表示当前文件***
+```
+# -*- coding:utf-8 -*-
+# test.py
+import sys
+def f(a, b):
+    print "a:",a
+    print "b",b
+if __name__ == '__main__':
+    f(sys.argv[1], sys.argv[2])
+    print sys.argv[0]
+'''
+输出
+[XXXXX@XXXX bin]$ python test.py asd 123
+a: asd
+b 123
+test.py
+'''
+```
+- 方法二：在shell中直接调用python函数中的函数，不用通过运行整个py文件
+```
+# test.sh
+python -c 'import tools.My_tool; My_tool.pt_mail_alert('$1','$2','$3')'
+# $1 $2 $3 为传入shell脚本的参数，-c表示要执行python语句了，\
+pt_mail_alert为tools/My_tool.py中的函数，当然如果要这样当做\
+模块导入（类似于import tools.My_tools这种的）需要在所在目录有\
+一个__init__.py文件，空的就可以。
+```
