@@ -15,4 +15,4 @@ python3 downloadOI.py --classes 'Ice_cream,Cookie' --mode train
 注意： 如果你想要下载的类名中有空格，记得用下划线'_'代替，比如Ice_cream.
 
 ### 4. 示例
-![下载进度]()
+![下载进度](https://github.com/zhangqizky/cv-with-nlp/blob/master/img/16_45_17__07_21_2019.jpg)
