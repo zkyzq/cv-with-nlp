@@ -230,5 +230,6 @@ vector<String> getOutputsNames(const Net& net)
         for (size_t i = 0; i < outLayers.size(); ++i)
             names[i] = layersNames[outLayers[i] - 1];
     }
+    
     return names;
 }
