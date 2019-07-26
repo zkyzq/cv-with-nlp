@@ -57,3 +57,25 @@ for i in range(nb_epochs):
         params_grad = evaluate_gradient(loss_function , batch , params)
         params = params - learning_rate * params_grad
 ```
+## 梯度下降优化方法（optimizer）
+#### Momentum
+
+```math
+v_t= \gamma v_{t-1} + \eta∇_θJ(θ)  
+
+\theta = \theta-v_t=\theta-\eta∇_θJ(θ)-\gamma v_t
+```
+在本次更新时引入上一次的更新向量，设置一个参数γ作为摩擦系数，一般取**γ=0.9**  
+- **为何叫momentum（动量）？**  
+类似于滚下斜坡的小球，动量不断增加，下降速度加快，直到速度够大产生的摩擦变为匀速运动  
+榆次类似，再加上momentum以后，反方向的更新向量会被抵消，相同方向的会被加强，进而减少更新向量的摆动。（目前类比速度和加速度失败，待后续研究）
+- **效果：** 收敛速度更快，而且减少震荡
+#### NAG（Nesterov accelerated gradient）
+- **提出原因:**  
+在快到函数曲面最低点的时候，应该要减慢梯度下降速度，避免超过最低点梯度反而上升
+```math
+v_t = \gamma v_t + \eta ∇_{\theta}J(\theta-\gamma v_{t-1})
+
+\theta = \theta-v_t
+```
+- **原理：**  没看懂
