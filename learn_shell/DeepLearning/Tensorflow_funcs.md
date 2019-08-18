@@ -164,3 +164,74 @@ array([[[4, 4, 4],
     - tmp2=tmp+stride[2]=2<end[2]继续下一轮
     - tmp3=tmp+stride[2]=3=end[2]结束
     - 输出t3=t2[:,:,[0,1,2]]=[[[3,3,3]]]  
+## tf.tile()
+按指定形状扩展张量
+- 格式：  
+tf.tile(input,multiples,name=None)  
+input是待扩展的张量，multiples是扩展方法。 
+假如input是一个3维的张量。那么mutiples就必须是一个1x3的1维张量。这个张量的三个值依次表示input的第1，第2，第3维数据扩展几倍。
+- 示例：
+```
+import tensorflow as tf
+
+a = tf.constant([[1, 2], [3, 4], [5, 6]], dtype=tf.float32)
+a1 = tf.tile(a, [2, 3])
+with tf.Session() as sess:
+    print(sess.run(a))
+    print(sess.run(a1))
+```
+结果:
+```
+# 原始二维张量
+[[ 1.  2.]
+ [ 3.  4.]
+ [ 5.  6.]]
+
+# 结果二维张量
+[[ 1.  2.  1.  2.  1.  2.]
+ [ 3.  4.  3.  4.  3.  4.]
+ [ 5.  6.  5.  6.  5.  6.]
+ [ 1.  2.  1.  2.  1.  2.]
+ [ 3.  4.  3.  4.  3.  4.]
+ [ 5.  6.  5.  6.  5.  6.]]
+
+#张量形状
+>>> print(a.shape)
+(3, 2)
+>>> print(a1.shape)
+(6, 6)
+```
+## tf.sequence_mask()
+返回一个表示每个单元的前N个位置的mask张量.
+- 格式:
+```
+sequence_mask(
+    lengths,
+    maxlen=None,
+    dtype=tf.bool,
+    name=None
+)
+```
+- 参数:  
+  - lengths：整数张量,其所有值小于等于maxlen.
+  - maxlen：标量整数张量,返回张量的最后维度的大小；默认值是lengths中的最大值.
+  - dtype：结果张量的输出类型.
+  - name：操作的名字.
+- 示例：
+```
+>>> with tf.Session() as sess:
+...     a=tf.sequence_mask([1,2,3],5)
+...     b = tf.sequence_mask([[1, 2], [3, 4]])
+...     sess.run(a)
+...     sess.run(b)
+...
+array([[ True, False, False, False, False],
+       [ True,  True, False, False, False],
+       [ True,  True,  True, False, False]], dtype=bool)
+
+# b
+[[[ True False False False]
+  [ True  True False False]]
+ [[ True  True  True False]
+  [ True  True  True  True]]]
+```
