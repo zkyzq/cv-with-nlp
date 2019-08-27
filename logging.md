@@ -17,3 +17,41 @@ python的一个模块，主要用于输出运行日志，可以设置输出日�
 - **常规使用方案**  
 开发应用程序或部署开发环境时，可以使用DEBUG或INFO级别的日志获取尽可能详细的日志信息来进行开发或部署调试；  
 应用上线或部署生产环境时，应该使用WARNING或ERROR或CRITICAL级别的日志来降低机器的I/O压力和提高获取错误日志信息的效率。日志级别的指定通常都是在应用程序的配置文件中进行指定的。
+- **两种记录日志方式：**  
+1、使用logging提供的模块级别的函数  
+2、使用logging的四大组件：loggers、handlers、filters、formatters
+- **方式一：模块级别函数**：  
+最直接的：
+```
+>>> logging.debug("Debug")
+>>> logging.info("info")
+>>> logging.warning("warning")
+WARNING:root:warning
+>>> logging.error("Error")
+ERROR:root:Error
+>>> logging.critical("Critical")
+CRITICAL:root:Critical
+```
+> 由以上示例可知，warning以上的可以输出，但是debug和info级别的无输出。这是因为logging模块提供的日志记录函数所使用的日志器设置的日志级别是WARNING，因此只有WARNING级别的日志记录以及大于它的ERROR和CRITICAL级别的日志记录被输出了，而小于它的DEBUG和INFO级别的日志记录被丢弃了。 
+
+> 解决这个问题要设置logging的等级level，还要先进行配置logging.basicConfig。
+
+```
+>>> import logging
+>>> logging.basicConfig(filename='logger.log', level=logging.INFO)
+>>> logging.debug("Debug")
+>>> logging.info("info")
+>>> logging.warning("warning")
+>>> logging.error("Error")
+>>> logging.critical("Critical")
+
+# logger.log 中的输出结果,可以看到info及以上的都记录了下来，低级别的debug没有输出
+'''
+INFO:root:info
+WARNING:root:warning
+ERROR:root:Error
+CRITICAL:root:Critical
+'''
+```
+
+logging.basicConfig的参数
