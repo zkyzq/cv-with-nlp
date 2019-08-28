@@ -17,3 +17,49 @@ python的一个模块，主要用于输出运行日志，可以设置输出日�
 - **常规使用方案**  
 开发应用程序或部署开发环境时，可以使用DEBUG或INFO级别的日志获取尽可能详细的日志信息来进行开发或部署调试；  
 应用上线或部署生产环境时，应该使用WARNING或ERROR或CRITICAL级别的日志来降低机器的I/O压力和提高获取错误日志信息的效率。日志级别的指定通常都是在应用程序的配置文件中进行指定的。
+```
+>>> import logging
+>>> logging.basicConfig(filename='logger.log', level=logging.INFO)
+>>> logging.debug("Debug")
+>>> logging.info("info")
+>>> logging.warning("warning")
+>>> logging.error("Error")
+>>> logging.critical("Critical")
+
+# logger.log 中的输出结果,可以看到info及以上的都记录了下来，低级别的debug没有输出
+'''
+INFO:root:info
+WARNING:root:warning
+ERROR:root:Error
+CRITICAL:root:Critical
+'''
+```
+
+常用logging.basicConfig配置示例，添加目标日志文件和输出信息格式：
+```
+LOG_FORMAT = "%(asctime)s - %(levelname)s - %(message)s"
+logging.basicConfig(filename='my.log',level=logging.DEBUG, format=LOG_FORMAT)
+
+logging.debug("This is a debug log.")
+logging.info("This is a info log.")
+logging.warning("This is a warning log.")
+logging.error("This is a error log.")
+logging.critical("This is a critical log.")
+
+# 自定义message信息
+logging.warning("This is {} {} log.".format('self','defined'))
+```
+输出my.log文件：
+```
+2019-08-29 00:15:07,746 - DEBUG - This is a debug log.
+2019-08-29 00:15:07,747 - INFO - This is a info log.
+2019-08-29 00:15:07,747 - WARNING - This is a warning log.
+2019-08-29 00:15:07,747 - ERROR - This is a error log.
+2019-08-29 00:15:07,747 - CRITICAL - This is a critical log.
+2019-08-29 00:15:07,747 - WARNING - This is self defined log.
+```
+**basicConfig说明：**   
+1、`logging.basicConfig()`函数是一个一次性的简单配置工具使，也就是说只有在第一次调用该函数时会起作用，后续再次调用该函数时完全不会产生任何操作的，多次调用的设置并不是累加操作。  
+2、日志器（Logger）是有层级关系的，上面调用的logging模块级别的函数所使用的日志器是RootLogger类的实例，其名称为'root'，它是处于日志器层级关系最顶层的日志器，且该实例是以单例模式存在的。  
+3、如果要记录的日志中包含变量数据，可使用一个格式字符串作为这个事件的描述消息（logging.debug、logging.info等函数的第一个参数），然后将变量数据作为第二个参数*args的值进行传递，如:`logging.warning('%s is %d years old.', 'Tom', 10)`，输出内容为WARNING:root:Tom is 10 years old.  
+4、文件默认为'a'的打开方式，也就是以朱家方式打开，可以通过参数设置
